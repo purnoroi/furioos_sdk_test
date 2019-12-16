@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src='http://code.jquery.com/jquery-latest.js'></script>
+</head>
+<body>
+  <input type="text" id="msg" />
+  <input type="button" id="ajax_test" value="ajax_test" />
+  <div id="result"></div>
+  <script>
+    $('#ajax_test').click(function () {
+      $('#result').html('');
+      $.ajax({
+        url: 'http://localhost:3000/ajax',
+        dataType: 'json',
+        type: 'POST',
+        data: {
+          'msg': $('#msg').val()
+        },
+        success: function (result) {
+          if (result['result'] == true) {
+            $('#result').html(result['msg']);
+          }
+        }
+      });
+    })
+  </script>
+</body>
+
+</html>
